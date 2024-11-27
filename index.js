@@ -50,6 +50,13 @@ const setup = async () => {
   };
 
   console.log('Registering platform with config:', platformConfig);
+  // Register platform
+  try {
+    await lti.registerPlatform(platformConfig);
+    console.log('Platform registered successfully');
+  } catch (err) {
+    console.warn('Ignoring as platform may be already created. Platform registration error:', err);
+  }
 
   // // First check if platform exists
   // try {

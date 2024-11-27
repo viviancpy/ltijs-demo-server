@@ -53,7 +53,7 @@ const setup = async () => {
 
     // First check if platform exists
     try {
-      const existingPlatform = await dyDb.Get(null, 'platforms', { platformUrl: platformConfig.url });
+      const existingPlatform = await Database.Get(null, 'platforms', { platformUrl: platformConfig.url });
       console.log('Existing platform check result:', existingPlatform);
     } catch (err) {
       console.error('Error checking existing platform:', err);

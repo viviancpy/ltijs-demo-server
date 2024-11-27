@@ -51,22 +51,22 @@ const setup = async () => {
 
   console.log('Registering platform with config:', platformConfig);
 
-  // First check if platform exists
-  try {
-    const existingPlatform = await lti.Database.Get(null, 'platforms', { platformUrl: platformConfig.url });
-    console.log('Existing platform check result:', existingPlatform);
-  } catch (err) {
-    console.error('Error checking existing platform:', err);
-  }
+  // // First check if platform exists
+  // try {
+  //   const existingPlatform = await lti.Database.Get(null, 'platforms', { platformUrl: platformConfig.url });
+  //   console.log('Existing platform check result:', existingPlatform);
+  // } catch (err) {
+  //   console.error('Error checking existing platform:', err);
+  // }
 
-  // Register platform
-  try {
-    await lti.registerPlatform(platformConfig);
-    console.log('Platform registered successfully');
-  } catch (err) {
-    console.error('Platform registration error:', err);
-    throw err;
-  }
+  // // Register platform
+  // try {
+  //   await lti.registerPlatform(platformConfig);
+  //   console.log('Platform registered successfully');
+  // } catch (err) {
+  //   console.error('Platform registration error:', err);
+  //   throw err;
+  // }
 
 }
 

@@ -13,7 +13,7 @@ const db = new Database({
 // Setup
 lti.setup(process.env.LTI_KEY,
   {
-    pulgin: db,
+    plugin: db,
     dynamic: true
   }, {
   staticPath: path.join(__dirname, './public'), // Path to static files

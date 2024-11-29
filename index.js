@@ -1,14 +1,20 @@
 require('dotenv').config()
 const path = require('path')
 const routes = require('./src/routes')
-
+const Database = require('./src/ltiDatabase.js')
 const lti = require('ltijs').Provider
+
+// Setup ltijs-sequelize using the same arguments as Sequelize's generic contructor
+const db = new Database({
+  url: process.env.DB_URL,
+  connection: { user: process.env.DB_USER, pass: process.env.DB_PASS }
+})
 
 // Setup
 lti.setup(process.env.LTI_KEY,
   {
-    url: process.env.DB_URL,
-    connection: { user: process.env.DB_USER, pass: process.env.DB_PASS }
+    pulgin: db,
+    dynamic: true
   }, {
   staticPath: path.join(__dirname, './public'), // Path to static files
   cookies: {
@@ -20,7 +26,7 @@ lti.setup(process.env.LTI_KEY,
 
 // When receiving successful LTI launch redirects to app
 lti.onConnect(async (token, req, res) => {
-  return res.sendFile(path.join(__dirname, './public/index_test.html'))
+  return res.sendFile(path.join(__dirname, './public/index.html'))
 })
 
 // When receiving deep linking request redirects to deep screen

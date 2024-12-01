@@ -121,6 +121,33 @@ class Database {
     })
     stateSchema.index({ state: 1 }, { unique: true })
 
+    const appUserSchema = new Schema({
+        platformUrl: String,
+        clientId: String,
+        platformUserName: String,
+        site: {
+            siteUrl: String,
+            siteUserName: String
+        },
+        createdAt: { type: Date, default: Date.now }
+    })
+    
+    // Add an index for faster lookups
+    appUserSchema.index({ platformUrl: 1, clientId: 1, platformUserName: 1 }, { unique: true })
+
+    const connectedAppSchema = new Schema({
+        platformUrl: String,
+        clientId: String,
+        siteUrl: String,
+        connectedAppClientId: String,
+        connectedAppSecretId: String,
+        connectedAppSecretKey: String,
+        createdAt: { type: Date, default: Date.now }
+    })
+    
+    // Add an index for faster lookups
+    connectedAppSchema.index({ platformUrl: 1, clientId: 1, siteUrl: 1 }, { unique: true })
+
     try {
       mongoose.model('idtoken', idTokenSchema)
       mongoose.model('contexttoken', contextTokenSchema)
@@ -131,6 +158,9 @@ class Database {
       mongoose.model('accesstoken', accessTokenSchema)
       mongoose.model('nonce', nonceSchema)
       mongoose.model('state', stateSchema)
+      // Tableau specific
+      mongoose.model('appUser', appUserSchema)
+      mongoose.model('connectedApp', connectedAppSchema)
     } catch (err) {
       provDatabaseDebug('Model already registered. Continuing')
     }

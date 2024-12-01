@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Project Submission</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+        }
+
+        table td.fit {
+            white-space: nowrap;
+            width: 1%;
+        }
+
+        td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 5px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+
+        #styling {
+            float: none;
+            margin: 0 auto;
+            padding: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="text-center">
+        <h1>Kepro Solutions Demo for CIS - Tableau Dashboard</h1>
+    </div>
+    <div class="text-center">
+        <script type='module'
+            src='https://10ax.online.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js'></script>
+        <tableau-viz id='tableau-viz' src="{{siteUrl}}" width='2195' height='1060' hide-tabs
+            toolbar='bottom' token="{{siteJwt}}"> </tableau-viz>
+    </div>
+</body>
+
+</html>

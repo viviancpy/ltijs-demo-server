@@ -34,7 +34,11 @@ lti.setup(process.env.LTI_KEY,
 lti.onConnect(async (token, req, res) => {
   try {
     // Get the user name from the token
-    const platformUserName = token.userInfo.name || token.user;
+    console.log('Received token: ', token);
+    console.log('Received req: ', JSON.stringify(req));
+    console.log('Received res: ', JSON.stringify(res));
+
+    const platformUserName = token.userInfo.userName || token.user;
     
     // Read the template file
     const templateContent = await fs.readFile(

@@ -34,11 +34,7 @@ lti.setup(process.env.LTI_KEY,
 lti.onConnect(async (token, req, res) => {
   try {
     // Get the user name from the token
-    console.log('Received token: ', token);
-    console.log('Received req: ', JSON.stringify(req));
-    console.log('Received res: ', JSON.stringify(res));
-
-    const platformUserName = token.userInfo.userName || token.user;
+    const platformUserName = token.platformContext.custom.username || token.user;
     
     // Read the template file
     const templateContent = await fs.readFile(
@@ -60,8 +56,9 @@ lti.onConnect(async (token, req, res) => {
     });
 
     // Send the rendered HTML
-    res.setHeader('Content-Type', 'text/html');
+    console.log("html...");
     console.log(html);
+    res.setHeader('Content-Type', 'text/html');
     return res.send(html);
 
   } catch (err) {

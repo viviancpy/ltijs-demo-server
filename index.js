@@ -38,38 +38,40 @@ lti.onConnect(async (token, req, res) => {
     console.log('req:', req);
     console.log('res:', res);
 
-    return lti.redirect(res, './public/template.html');
+    return lti.redirect(res, './public/template.html', {isNewResource: true});
 
-    // viz on load does not work, same CORS issue
+    // Trial 1 - viz on load does not work, Failed: same CORS issue
     // return res.sendFile(path.join(__dirname, './public/loadVizOnComplete.html'))
 
-    // Get the user name from the token
-    const platformUserName = token.platformContext.custom.username || token.user;
+    // Trial 2 - res.send with template filled, Failed: same CORS issue
+    // // Get the user name from the token
+    // const platformUserName = token.platformContext.custom.username || token.user;
     
-    // Read the template file
-    const templateContent = await fs.readFile(
-      path.join(__dirname, './public/template.html'), 
-      'utf8'
-    );
+    // // Read the template file
+    // const templateContent = await fs.readFile(
+    //   path.join(__dirname, './public/template.html'), 
+    //   'utf8'
+    // );
 
-    // Compile the template
-    const template = handlebars.compile(templateContent);
+    // // Compile the template
+    // const template = handlebars.compile(templateContent);
 
-    // Get Tableau site URL and JWT token
-    const siteUrl = tableauService.getTableauSiteUrl(platformUserName);
-    const siteJwt = tableauService.createTableauJwtToken(platformUserName);
+    // // Get Tableau site URL and JWT token
+    // const siteUrl = tableauService.getTableauSiteUrl(platformUserName);
+    // const siteJwt = tableauService.createTableauJwtToken(platformUserName);
+    
+    // // CORS need to handle
+    // // Render the template with the values
+    // const html = template({
+    //   siteUrl: siteUrl,
+    //   siteJwt: siteJwt
+    // });
 
-    // Render the template with the values
-    const html = template({
-      siteUrl: siteUrl,
-      siteJwt: siteJwt
-    });
-
-    // Send the rendered HTML
-    console.log("html...");
-    console.log(html);
-    res.setHeader('Content-Type', 'text/html');
-    return res.send(html);
+    // // Send the rendered HTML
+    // console.log("html...");
+    // console.log(html);
+    // res.setHeader('Content-Type', 'text/html');
+    // return res.send(html);
 
   } catch (err) {
     console.error('Error in onConnect:', err);

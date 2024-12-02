@@ -24,15 +24,13 @@
             const vizURL = "https://public.tableau.com/views/LearnEmbeddedAnalytics/SalesOverviewDashboard";
 
             // Initialize the Tableau Viz
-            const viz = new TableauViz(vizContainer, {
-                url: vizURL,
-                toolbar: "hidden",
-                hideTabs: true,
-                hideEditButton: true,
-                hideEditInDesktopButton: true,
-                suppressDefaultEditBehavior: true,
-            });
 
+            const viz = new TableauViz();
+            viz.src = vizURL;
+            viz.toolbar = 'hidden';
+
+            // add the viz object to the DOM
+            vizContainer.appendChild(viz);
             console.log('Tableau Viz initialized');
         });
     </script>

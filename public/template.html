@@ -39,6 +39,17 @@
             padding: 50px;
         }
     </style>
+    <script>
+        const tableauViz = document.getElementById('tableau-viz');
+        tableauViz.addEventListener(TableauEventType.VizLoadError, (e) => {
+            if (e.detail.errorCode == "unknown-auth-error") {
+                e.target.iframeAuth = true;
+            } else {
+                e.target.removeAttribute("token"); // prompt user to login
+            }
+        });
+
+    </script>
 </head>
 
 <body>
@@ -48,8 +59,8 @@
     <div class="text-center">
         <script type='module'
             src='https://10ax.online.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js'></script>
-        <tableau-viz id='tableau-viz' src="{{siteUrl}}" width='2195' height='1060' hide-tabs
-            toolbar='bottom' token="{{siteJwt}}"> </tableau-viz>
+        <tableau-viz id='tableau-viz' src="{{siteUrl}}" width='2195' height='1060' hide-tabs toolbar='bottom'
+            token="{{siteJwt}}" onVizLoadError="handleLoadError"> </tableau-viz>
     </div>
 </body>
 

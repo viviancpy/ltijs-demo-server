@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,19 +9,38 @@
     <!--- Load Tableau JavaScript API V3  --->
     <script type="module" src="https://public.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js"></script>
 </head>
+
 <body>
     <h2>Loading dashboard after DOM content Loaded....</h2>
     <div id="tableauViz"></div>
-    
+
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const viz = document.getElementById("tableauViz");
-        viz.src = "https://public.tableau.com/views/LearnEmbeddedAnalytics/SalesOverviewDashboard";
-        viz.toolbar = "hidden";
-        viz.hideTabs = true;
-        viz.height = "600px";
-        viz.width = "1000px";
-      });
+        import {
+            TableauViz,
+            TableauEventType,
+        } from 'https://public.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js';
+
+        const viz = document.getElementById('tableauViz');
+        const vizURL = "https://public.tableau.com/views/LearnEmbeddedAnalytics/SalesOverviewDashboard";
+
+        document.addEventListener("DOMContentLoaded", function () {
+            _initViz();
+        });
+
+        function _initViz() {
+            console.log(' _initViz....');
+            viz.src = vizURL;
+            viz.toolbar = "hidden";
+            viz.hideTabs = true;
+            viz.hideEditButton = true;
+            viz.hideEditInDesktopButton = true;
+            viz.suppressDefaultEditBehavior = true;
+            viz.height = 600;
+            viz.width = 800;
+
+            tableauVizElement.appendChild(viz);
+        }
     </script>
-  </body>
+</body>
+
 </html>

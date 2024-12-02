@@ -1,33 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Embed Project</title>
-    <!--- Load Tableau JavaScript API V3  --->
-    <script type="module" src="https://embedding.tableauusercontent.com/tableau.embedding.3.1.0.min.js"></script>
+<html>
+  <script type="module" src="https://public.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js"></script>
+  <style>
+    html,
+    body {
+      margin: 2px;
+    }
+
+    #main {
+      width: calc(100vw - 364px);
+      height: calc(100vh - 464px);
+    }
+
+  </style>
 </head>
 <body>
+  <div id="main">
+    <tableau-viz id="tableauViz" src="https://public.tableau.com/views/DeveloperSuperstore/Overview"
+      iframe-attr-loading="lazy" iframe-attr-class="fun red-border">
+      <viz-filter field="YEAR(Order Date)" value="2022"></viz-filter>
+      <iframe-style>
+        .red-border { border: 5px solid red !important; }
+        .fun { box-shadow: 0px 0px 37px 0px #000000; transform: perspective(250px) rotateY(2deg) scale(0.75); }
+      </iframe-style>
 
-<!--- Viz Component - renders on page load --->
-
-     <tableau-viz
-        id="tableauViz"
-        width="1000"
-        height="1000"
-        hide-tabs=false
-        touch-optimize=false
-        disable-url-actions=false
-        debug=false
-        src="https://public.tableau.com/views/LearnEmbeddedAnalytics/SalesOverviewDashboard"
-        device="Desktop"
-        toolbar="bottom"
-        >   
     </tableau-viz>
-
-<!--- Created via Connected Apps-Tableau Playground --->
-<!--- Andre de Vries - andredevries.dev --->
-
+  </div>
+  <script type="module">
+    import { TableauEventType } from 'https://public.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js';
+    const tableauViz = document.getElementById('tableauViz');
+    window.addEventListener('resize', () => tableauViz.resize());
+  </script>
 </body>
 </html>

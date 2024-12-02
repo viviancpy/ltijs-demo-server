@@ -38,7 +38,7 @@ lti.onConnect(async (token, req, res) => {
     console.log('req:', req);
     console.log('res:', res);
 
-    return lti.redirect(res, './public/index.html', {isNewResource: true});
+    return lti.redirect(res, './public/index.html');
 
     // Trial 1 - viz on load does not work, Failed: same CORS issue
     // return res.sendFile(path.join(__dirname, './public/loadVizOnComplete.html'))

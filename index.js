@@ -33,7 +33,13 @@ lti.setup(process.env.LTI_KEY,
 // When receiving successful LTI launch redirects to app
 lti.onConnect(async (token, req, res) => {
   try {
-    return res.sendFile(path.join(__dirname, './public/template.html'))
+    console.log('Connected....');
+    console.log('token:', token);
+    console.log('req:', req);
+    console.log('res:', res);
+
+    return res.redirect('./public/template.html');
+    // return res.sendFile(path.join(__dirname, './public/template.html'))
     // Get the user name from the token
     const platformUserName = token.platformContext.custom.username || token.user;
     

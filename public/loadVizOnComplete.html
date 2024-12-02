@@ -14,33 +14,27 @@
     <h2>Loading dashboard after DOM content Loaded....</h2>
     <div id="tableauViz"></div>
 
-    <script>
-        import {
-            TableauViz,
-            TableauEventType,
-        } from 'https://public.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js';
-
-        const viz = document.getElementById('tableauViz');
-        const vizURL = "https://public.tableau.com/views/LearnEmbeddedAnalytics/SalesOverviewDashboard";
+    <script type="module">
+        // Import TableauViz from the Tableau API
+        import { TableauViz } from 'https://public.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js';
 
         document.addEventListener("DOMContentLoaded", function () {
-            _initViz();
+            // Tableau visualization initialization
+            const vizContainer = document.getElementById('tableauViz');
+            const vizURL = "https://public.tableau.com/views/LearnEmbeddedAnalytics/SalesOverviewDashboard";
+
+            // Initialize the Tableau Viz
+            const viz = new TableauViz(vizContainer, {
+                url: vizURL,
+                toolbar: "hidden",
+                hideTabs: true,
+                hideEditButton: true,
+                hideEditInDesktopButton: true,
+                suppressDefaultEditBehavior: true,
+            });
+
+            console.log('Tableau Viz initialized');
         });
-
-        function _initViz() {
-            console.log(' _initViz....');
-            viz.src = vizURL;
-            viz.toolbar = "hidden";
-            viz.hideTabs = true;
-            viz.hideEditButton = true;
-            viz.hideEditInDesktopButton = true;
-            viz.suppressDefaultEditBehavior = true;
-            viz.height = 600;
-            viz.width = 800;
-
-            tableauVizElement.appendChild(viz);
-        }
     </script>
-</body>
 
 </html>

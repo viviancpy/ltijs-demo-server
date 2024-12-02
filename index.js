@@ -38,8 +38,10 @@ lti.onConnect(async (token, req, res) => {
     console.log('req:', req);
     console.log('res:', res);
 
-    // return res.redirect('./public/template.html');
-    return res.sendFile(path.join(__dirname, './public/loadVizOnComplete.html'))
+    return lti.redirect(res, './public/template.html');
+
+    // viz on load does not work, same CORS issue
+    // return res.sendFile(path.join(__dirname, './public/loadVizOnComplete.html'))
 
     // Get the user name from the token
     const platformUserName = token.platformContext.custom.username || token.user;

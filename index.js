@@ -61,6 +61,7 @@ lti.onConnect(async (token, req, res) => {
 
     // Send the rendered HTML
     res.setHeader('Content-Type', 'text/html');
+    console.log(html);
     return res.send(html);
 
   } catch (err) {
